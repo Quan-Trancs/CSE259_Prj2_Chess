@@ -55,10 +55,8 @@ main.
 % YOUR CODE STARTS HERE
 % TASK 3: MODIFY THE CODE BELOW TO MAKE playerA and playerB auto-compete.
 play(Board) :-
-    print_board(Board), %%ADDITIONAL
-    %%get_command(Command),
-    %%execute_command(Command, Board, NewBoard),
-    execute_command(playerA, NewBoard, NextNewBoard),
+    print_board(Board),
+    execute_command(playerA, Board, NewBoard),
     execute_command(playerB, NewBoard, NextNewBoard),
     play(NextNewBoard).
 get_command(Command) :-
@@ -132,7 +130,7 @@ bookA( [ state(white, WhiteKing, WhiteKingRook, WhiteQueenRook), % e2e4
     piece(a-2, white, pawn ), piece(b-2, white, pawn ),
     piece(c-2, white, pawn ), piece(d-2, white, pawn ),
     piece(f-2, white, pawn ), piece(g-2, white, pawn ),
-    piece(h-2, white, pawn ), piece(e-7, white, pawn ) ], e-2, e-4).
+    piece(h-2, white, pawn ), piece(e-2, white, pawn ) ], e-2, e-4).
 
 % Code for alpha beta prunning
 % Player is playerA, Turn is the player whose turn is to play
@@ -252,7 +250,6 @@ finish_move(Player, NewBoard, From, To, Rating, OutBoard) :-
     make_move(NewBoard, From, To, OutBoard),
     report_move(Color, OutBoard, From, To, Rating).
 select_move(Player, Board, From, To, bookA) :- % Use book for playerA
-    write('Working...here'),
     player(Player, white),
     bookA(Board, From, To), !.
 select_move(Player, Board, From, To, bookB) :- % Use book for playerB
